@@ -30,9 +30,8 @@ impl Device {
             );
         }
 
-        let cap = cap
-            .unwrap()
-            .snaplen(1800)
+        let cap = unsafe { cap.unwrap_unchecked() }
+            .snaplen(1800) // limit captured length
             .promisc(true)
             .rfmon(true)
             .immediate_mode(true)
