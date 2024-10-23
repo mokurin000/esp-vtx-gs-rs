@@ -1,13 +1,13 @@
-
 use pcap::{Active, Capture, Inactive};
 
+#[allow(dead_code)]
 pub struct Device {
-    dev_name: String,
+    pub dev_name: String,
     pub cap: Capture<Active>,
 }
 
-unsafe impl Sync for Device{}
-unsafe impl Send for Device{}
+unsafe impl Sync for Device {}
+unsafe impl Send for Device {}
 
 /*
     change channel of device:
@@ -37,14 +37,12 @@ impl Device {
             .rfmon(true)
             .immediate_mode(true)
             .buffer_size(16000000);
-        
-        let mut active_cap = cap.open().unwrap();
 
-        active_cap.filter("ether[0x0a:4]==0x11223344 && ether[0x0e:2] == 0x5566", true).unwrap();
+        let active_cap = cap.open().unwrap();
+
         Device {
             dev_name,
             cap: active_cap,
         }
     }
-
 }

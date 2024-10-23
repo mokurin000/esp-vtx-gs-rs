@@ -6,21 +6,10 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bitfield = "0.14.0"
-clap = {version = "4.5.4", features = ["derive"]}
-crc = "3.0.1"
+clap = { version = "4.5.4", features = ["derive"] }
 pcap = "1.3.0"
-radiotap = "1.3.0"
-zfec-rs = "0.1.0"
 
-[[test]]  
-name = "send_a_frame"  
-harness = false 
-
-[[bench]]
-name = "cap_handle"
-harness = false
-
-[[bench]]
-name = "packet_cnt"
-harness = false
+[profile.release]
+strip = true
+lto = true
+codegen-units = 1
